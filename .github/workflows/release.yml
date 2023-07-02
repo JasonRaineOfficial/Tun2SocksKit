@@ -20,7 +20,7 @@ jobs:
           path: 'temp'
       - uses: actions/checkout@v3
         with:
-          repository: 'arror/hev-socks5-tunnel-iphonesimulator'
+          repository: 'JasonRaineOfficial/hev-socks5-tunnel-iphonesimulator'
           path: 'fake'
           
       - name: build macos arm64_x86_64
@@ -32,7 +32,7 @@ jobs:
           make clean
           make PP=g++ \
                CC=gcc \
-               CFLAGS="-arch x86_64 -mmacosx-version-min=12.0" \
+               CFLAGS="-arch x86_64 -mmacosx-version-min=12.0 -fembed-bitcode" \
                LFLAGS="-arch x86_64 -mmacosx-version-min=12.0 -Wl,-Bsymbolic-functions" static
           libtool -static -o ../macos_arm64_x86_64/macos_x86_64/libhev-socks5-tunnel.a \
                   bin/libhev-socks5-tunnel.a \
@@ -43,7 +43,7 @@ jobs:
           make clean
           make PP=g++ \
                CC=gcc \
-               CFLAGS="-arch arm64 -mmacosx-version-min=12.0" \
+               CFLAGS="-arch arm64 -mmacosx-version-min=12.0 -fembed-bitcode" \
                LFLAGS="-arch arm64 -mmacosx-version-min=12.0 -Wl,-Bsymbolic-functions" static
           libtool -static -o ../macos_arm64_x86_64/macos_arm64/libhev-socks5-tunnel.a \
                   bin/libhev-socks5-tunnel.a \
@@ -62,7 +62,7 @@ jobs:
           make clean
           make PP=g++ \
                CC=gcc \
-               CFLAGS="-arch x86_64 -target x86_64-apple-ios13.1-macabi" \
+               CFLAGS="-arch x86_64 -target x86_64-apple-ios13.1-macabi -fembed-bitcode" \
                LFLAGS="-arch x86_64 -target x86_64-apple-ios13.1-macabi -Wl,-Bsymbolic-functions" static
           libtool -static -o ../maccatalyst_arm64_x86_64/maccatalyst_x86_64/libhev-socks5-tunnel.a \
                   bin/libhev-socks5-tunnel.a \
@@ -72,7 +72,7 @@ jobs:
           make clean
           make PP=g++ \
                CC=gcc \
-               CFLAGS="-arch arm64 -target arm64-apple-ios13.1-macabi" \
+               CFLAGS="-arch arm64 -target arm64-apple-ios13.1-macabi -fembed-bitcode" \
                LFLAGS="-arch arm64 -target arm64-apple-ios13.1-macabi -Wl,-Bsymbolic-functions" static
           libtool -static -o ../maccatalyst_arm64_x86_64/maccatalyst_arm64/libhev-socks5-tunnel.a \
                   bin/libhev-socks5-tunnel.a \
@@ -89,7 +89,7 @@ jobs:
           make clean
           make PP="xcrun --sdk iphoneos --toolchain iphoneos clang" \
                CC="xcrun --sdk iphoneos --toolchain iphoneos clang" \
-               CFLAGS="-arch arm64 -mios-version-min=12.0" \
+               CFLAGS="-arch arm64 -mios-version-min=12.0 -fembed-bitcode" \
                LFLAGS="-arch arm64 -mios-version-min=12.0 -Wl,-Bsymbolic-functions" static
           libtool -static -o ../iphoneos_arm64/libhev-socks5-tunnel.a \
                   bin/libhev-socks5-tunnel.a \
@@ -107,13 +107,13 @@ jobs:
           make clean
           make PP="xcrun -sdk iphonesimulator clang" \
                CC="xcrun -sdk iphonesimulator clang" \
-               CFLAGS="-arch arm64 -mios-simulator-version-min=12.0" \
+               CFLAGS="-arch arm64 -mios-simulator-version-min=12.0 -fembed-bitcode" \
                LFLAGS="-arch arm64 -mios-simulator-version-min=12.0 -Wl,-Bsymbolic-functions" static
           cp bin/libhev-socks5-tunnel.a ../iphonesimulator_arm64_x86_64/iphonesimulator_arm64/libhev-socks5-tunnel.a
           make clean
           make PP="xcrun -sdk iphonesimulator clang" \
                CC="xcrun -sdk iphonesimulator clang" \
-               CFLAGS="-arch x86_64 -mios-simulator-version-min=12.0" \
+               CFLAGS="-arch x86_64 -mios-simulator-version-min=12.0 -fembed-bitcode" \
                LFLAGS="-arch x86_64 -mios-simulator-version-min=12.0 -Wl,-Bsymbolic-functions" static
           cp bin/libhev-socks5-tunnel.a ../iphonesimulator_arm64_x86_64/iphonesimulator_x86_64/libhev-socks5-tunnel.a
           make clean
@@ -153,9 +153,9 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Tun2SocksKit Release ${{ github.event.inputs.version }}!!!
-          commit_user_name: Arror
-          commit_user_email: hallo.maqiang@icloud.com
-          commit_author: Arror <hallo.maqiang@icloud.com>
+          commit_user_name: JasonRaineOfficial
+          commit_user_email: nebular.pointer0t@icloud.com
+          commit_author: JasonRaineOfficial <nebular.pointer0t@icloud.com>
           tagging_message: ${{ github.event.inputs.version }}
           file_pattern: 'Package.swift'
           
@@ -165,7 +165,3 @@ jobs:
           draft: false
           tag_name: ${{ github.event.inputs.version }}
           files: ./HevSocks5Tunnel.xcframework.zip
-
-
-
-
